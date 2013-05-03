@@ -34,7 +34,7 @@ void setup() {
   digitalWrite(pin6, LOW);
   digitalWrite(pin7, LOW);
   
-  Serial.println("Ready!\nEnter a command. ex: 'turn on 0' turns on pin 0.");
+  Serial.println("Ready!\nEnter a command. ex: 'turn on 0;' turns on pin 0.");
 }
 
 
@@ -53,7 +53,8 @@ void catchSerialEvent(){
     //Serial.println("serial event captured");
     inChar = (char)Serial.read();
     inputString += (String)inChar;
-    //Serial.println("inputString is "+inputString);
+    Serial.println("inputString is "+inputString);
+    //; is the termination character
     if (inChar == ';') {
       messageFinished = true;
       Serial.println("Message successfully recieved: "+ inputString);
