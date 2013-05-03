@@ -67,15 +67,15 @@ void catchSerialEvent(){
 }
 void execute(String message){
   //execute command based on message
-    if (message == "turn off 0") {
+    if (message.equals("turn off 0;")) {
         digitalWrite(pin0, LOW);
         Serial.println("Pin 0 turning off.");
       }
-    if (message == "turn on 0") {
+    if (message.equals("turn on 0;")) {
       digitalWrite(pin0, HIGH);
       Serial.println("Pin 0 turning on.");
     }
-    if (message == "status") {
+    if (message.equals("status;")) {
       boolean pinStatus = digitalRead(pin0);
       Serial.print(pinStatus, BIN);
     }
