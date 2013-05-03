@@ -1,34 +1,54 @@
-//xv oceans relay module serial control
-//test comment.
+int pin = 11; //This is the pin that information is being read from.
+String inputString = ""; //
+boolean messageFinished = false;
 
 void setup() {
-  Serial.begin(57600);
-  pinMode(0, OUTPUT);
-  pinMode(1, OUTPUT);
-  digitalWrite(0, LOW);
-  digitalWrite(1, LOW);
-  Serial.println("Ready");
+  pinMode(pin, OUTPUT);
+  Serial.begin(9600);
+  digitalWrite(pin, LOW);
+  Serial.println("Ready!");
 }
 
-
 void loop() {
-  while (Serial.available()) {
-    // get the new byte:
-    char inChar = (char)Serial.read();
-    
-    if (inChar == '1') {
-      digitalWrite(1, HIGH);
-      Serial.println("turning on 1");
-    }
-    if (inChar == '0') {
-      digitalWrite(0, HIGH);
-      Serial.println("turning on 0");
-    }
-    if (inChar == '2') {
-      digitalWrite(0, LOW);
-      digitalWrite(1, LOW);
-      Serial.println("clearing");
+  if (messageFinished) {
+    Serial.println(inputString);
+    inputString = "";
+    messageFinished = false;
   }
 }
 
+void serialEvent(){
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();
+    inputString += (String)inChar;
+    
+    if (inChar == '\n') {
+      messageFinished = true;
+    } 
+  }
+  //test
+  
+  //execute command based on charset
+    if (inputString == "0") {
+        digitalWrite(pin, LOW);
+      }
+    if (inputString == "1") {
+      digitalWrite(pin, HIGH);
+    }
+    if (inputString == "on") {
+      digitalWrite(pin, HIGH);
+    }
+    if (inputString == "off") {
+      digitalWrite(pin, LOW);
+    }
+    if (inputString == "status") {
+      boolean pinStatus = digitalRead(pin);
+      Serial.print(pinStatus, BIN);
+    }
+    if (inputString == "2") {
+      boolean pinStatus = digitalRead(pin);
+      Serial.print(pinStatus, BIN);
+    }
+  
+}
 
