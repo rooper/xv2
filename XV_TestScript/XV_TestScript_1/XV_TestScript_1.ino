@@ -5,6 +5,8 @@ boolean messageFinished = false;
 void setup() {
   pinMode(pin, OUTPUT);
   Serial.begin(9600);
+  digitalWrite(pin, LOW);
+  Serial.println("Ready!");
 }
 
 void loop() {
