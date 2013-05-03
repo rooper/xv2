@@ -24,52 +24,56 @@ void setup() {
   pinMode(pin6, OUTPUT);
   pinMode(pin7, OUTPUT);
   
-  Serial.begin(9600);
-  digitalWrite(pin, LOW);
+  Serial.begin(19200);
+  digitalWrite(pin0, LOW);
+  digitalWrite(pin1, LOW);
+  digitalWrite(pin2, LOW);
+  digitalWrite(pin3, LOW);
+  digitalWrite(pin4, LOW);
+  digitalWrite(pin5, LOW);
+  digitalWrite(pin6, LOW);
+  digitalWrite(pin7, LOW);
+  
   Serial.println("Ready!");
 }
 
 
 //MAIN LOOP
 void loop() {
-  if (messageFinished) {
-    Serial.println(inputString);
-    inputString = "";
-    messageFinished = false;
-  }
+ serialEvent();
 }
 
 void serialEvent(){
-  while (Serial.available()) {
+  while (Serial.available() && !messageFinished) {
     char inChar = (char)Serial.read();
     inputString += (String)inChar;
     
     if (inChar == '\n') {
       messageFinished = true;
+      Serial.println("Message successfully recieved.");
     } 
   }
-  //test
   
-  //execute command based on charset
+  //execute command based on message
     if (inputString == "0") {
-        digitalWrite(pin, LOW);
+        digitalWrite(pin0, LOW);
       }
     if (inputString == "1") {
-      digitalWrite(pin, HIGH);
+      digitalWrite(pin0, HIGH);
     }
     if (inputString == "on") {
-      digitalWrite(pin, HIGH);
+      digitalWrite(pin0, HIGH);
     }
     if (inputString == "off") {
-      digitalWrite(pin, LOW);
+      digitalWrite(pin0, LOW);
     }
     if (inputString == "status") {
-      boolean pinStatus = digitalRead(pin);
-      Serial.print(pinStatus, BIN);
+      boolean pinStatus = digitalRead(pin0);
+      //Serial.print(pinStatus, BIN);
     }
     if (inputString == "2") {
-      boolean pinStatus = digitalRead(pin);
-      Serial.print(pinStatus, BIN);
+      boolean pinStatus = digitalRead(pin0);
+      //Serial.print(pinStatus, BIN);
     }
   
 }
