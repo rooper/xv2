@@ -53,6 +53,7 @@ void catchSerialEvent(){
     //Serial.println("serial event captured");
     inChar = (char)Serial.read();
     inputString += (String)inChar;
+    delay(50);
     Serial.println("inputString is "+inputString);
     //; is the termination character
     if (inChar == ';') {
@@ -67,18 +68,74 @@ void catchSerialEvent(){
 }
 void execute(String message){
   //execute command based on message
-    if (message.equals("turn off 0;")) {
+    if (message.equals("0;")) {
+      digitalWrite(pin0, LOW);
+      digitalWrite(pin1, LOW);
+      digitalWrite(pin2, LOW);
+      digitalWrite(pin3, LOW);
+      digitalWrite(pin4, LOW);
+      digitalWrite(pin5, LOW);
+      digitalWrite(pin6, LOW);
+      digitalWrite(pin7, LOW);
+      Serial.println("All Pins turned off.");
+    }
+    if (message.equals("1;")) {
+      digitalWrite(pin0, HIGH);
+      digitalWrite(pin1, HIGH);
+      digitalWrite(pin2, HIGH);
+      digitalWrite(pin3, HIGH);
+      digitalWrite(pin4, HIGH);
+      digitalWrite(pin5, HIGH);
+      digitalWrite(pin6, HIGH);
+      digitalWrite(pin7, HIGH);
+      Serial.println("All pins turned on.");
+    }
+    if (message.equals("0:0;")) {
         digitalWrite(pin0, LOW);
         Serial.println("Pin 0 turning off.");
-      }
-    if (message.equals("turn on 0;")) {
+    }
+    if (message.equals("1:0;")) {
       digitalWrite(pin0, HIGH);
       Serial.println("Pin 0 turning on.");
     }
-    if (message.equals("status;")) {
+    if (message.equals("2:0;")) {
       boolean pinStatus = digitalRead(pin0);
-      Serial.print(pinStatus, BIN);
+      Serial.println(pinStatus);
     }
-  
+    if (message.equals("0:1;")) {
+      digitalWrite(pin1, LOW);
+      Serial.println("Pin 1 turning off.");
+    }
+    if (message.equals("1:1;")) {
+      digitalWrite(pin1, HIGH);
+      Serial.println("Pin 1 turning on.");
+    }
+    if (message.equals("2:1;")) {
+      boolean pinStatus = digitalRead(pin1);
+      Serial.println(pinStatus);
+    }
+    if (message.equals("0:2;")) {
+      digitalWrite(pin2, LOW);
+      Serial.println("Pin 2 turning off.");
+    }
+    if (message.equals("1:2;")) {
+      digitalWrite(pin2, HIGH);
+      Serial.println("Pin 2 turning on.");
+    }
+    if (message.equals("2:2;")) {
+      boolean pinStatus = digitalRead(pin2);
+      Serial.println(pinStatus);
+    }
+    if (message.equals("0:3;")) {
+      digitalWrite(pin3, LOW);
+      Serial.println("Pin 3 turning off.");
+    }
+    if (message.equals("1:3;")) {
+      digitalWrite(pin3, HIGH);
+      Serial.println("Pin 3 turning on.");
+    }
+    if (message.equals("2:3;")) {
+      boolean pinStatus = digitalRead(pin3);
+      Serial.println(pinStatus);
+    }
 }
-
