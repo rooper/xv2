@@ -2,7 +2,7 @@
 //SERIAL RELAY CONTROL
 
 //SETUP
-//This is the pin that information is being read from.
+//These are the pins information is read from
 int pin0 = 0;
 int pin1 = 1; 
 int pin2 = 2; 
@@ -11,13 +11,16 @@ int pin4 = 4;
 int pin5 = 5; 
 int pin6 = 6; 
 int pin7 = 7; 
+//These are the variables status, commands, and "acting pins" are stored in.
+int pinString;
 String inputString;
 String statusString;
-int pinString;
+//These are checks to end while loops.
 boolean messageFinished;
 boolean statusFinished;
 
 void setup() {
+  //Set every pin as output
   pinMode(pin0, OUTPUT);
   pinMode(pin1, OUTPUT);
   pinMode(pin2, OUTPUT);
@@ -27,6 +30,7 @@ void setup() {
   pinMode(pin6, OUTPUT);
   pinMode(pin7, OUTPUT);
   
+  //Start serial and set all pins to off.
   Serial.begin(9600);
   digitalWrite(pin0, LOW);
   digitalWrite(pin1, LOW);
@@ -36,9 +40,10 @@ void setup() {
   digitalWrite(pin5, LOW);
   digitalWrite(pin6, LOW);
   digitalWrite(pin7, LOW);
+  //delay for stability
   delay(50);
   Serial.println("Ready!");
-  Serial.println("0 (off), 1 (on), or 2 (state). End with :");
+  Serial.println("Type 0 (off), 1 (on), or 2 (state) followed by : and then the pin you're using. E.G. 1:1;");
 }
 
 
@@ -61,12 +66,14 @@ void catchSerialEvent(){
     statusString += (String)inChar;
     //delay for stability
     delay(50);
+    //Checks if the command section of the input is finished.
     if (inChar == ':') {
       statusFinished = true;
     }
   }
   while (Serial.available() && !messageFinished && statusFinished) {
     //pinString = (int)Serial.read();
+    //Turn the character form of the numbers into the int form so digitalWrite accepts them.
     inChar = (char)Serial.read();
     if (inChar == '0') {
       pinString = 0;
@@ -93,6 +100,7 @@ void catchSerialEvent(){
       pinString = 7;
     }
     
+    //Debugging
     Serial.println("inputString is "+inputString);
     delay(10);
     Serial.println("statusString is "+statusString);
@@ -103,10 +111,9 @@ void catchSerialEvent(){
       messageFinished = true;
       //attempt to execute command
       execute(statusString, pinString);
-      //clear inputString
+      //reset all variables.
       inputString = "";
       statusString = "";
-      pinString = 0;
     }
   }
 }
