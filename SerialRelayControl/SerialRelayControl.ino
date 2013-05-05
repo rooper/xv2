@@ -72,9 +72,9 @@ void catchSerialEvent(){
     }
   }
   while (Serial.available() && !messageFinished && statusFinished) {
-    //pinString = (int)Serial.read();
+    pinString = (int)Serial.read() - 48;
     //Turn the character form of the numbers into the int form so digitalWrite accepts them.
-    inChar = (char)Serial.read();
+/*    inChar = (char)Serial.read();
     if (inChar == '0') {
       pinString = 0;
     }
@@ -99,7 +99,7 @@ void catchSerialEvent(){
     else if (inChar == '7') {
       pinString = 7;
     }
-    
+    */
     //Debugging
     Serial.println("inputString is "+inputString);
     delay(10);
