@@ -13,6 +13,7 @@ int pin6 = 6;
 int pin7 = 7; 
 //These are the variables status, commands, and "acting pins" are stored in.
 int pinString;
+int pinState;
 String inputString;
 String statusString;
 //These are checks to end while loops.
@@ -101,11 +102,12 @@ void catchSerialEvent(){
     }
     */
     //Debugging
-    Serial.println("inputString is "+inputString);
+/*    Serial.println("inputString is "+inputString);
     delay(10);
     Serial.println("statusString is "+statusString);
     delay(10);
     Serial.println("pinString is "+(String)pinString);
+*/
     //; is the termination character
     if (inChar == ';') {
       messageFinished = true;
@@ -122,11 +124,15 @@ void execute(String pinStatus, int pinNumber){
   if (pinStatus.equals("0:")) {
     digitalWrite(pinNumber, LOW);
     Serial.println("Pin "+(String)pinNumber+" turning off.");
+    pinState = 0;
     
   }
   if (pinStatus.equals("1:")) {
     digitalWrite(pinNumber, HIGH);
     Serial.println("Pin "+(String)pinNumber+" turning on.");
+    pinState = 1;
   }
+  if (pinStatus.equals("2:")) {
+    Serial.println(pinState);
 }
 
