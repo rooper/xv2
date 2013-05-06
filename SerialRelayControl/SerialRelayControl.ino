@@ -134,5 +134,6 @@ void execute(String pinStatus, int pinNumber){
   }
   if (pinStatus.equals("2:")) {
     Serial.println(pinState);
+  }
 }
 
