@@ -42,9 +42,8 @@ void setup() {
   digitalWrite(pin6, LOW);
   digitalWrite(pin7, LOW);
   //delay for stability
-  delay(50);
+  delay(1000);
   Serial.println("Ready!");
-  Serial.println("Type 0 (off), 1 (on), or 2 (state) followed by : and then the pin you're using. E.G. 1:1;");
 }
 
 
