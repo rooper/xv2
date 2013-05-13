@@ -134,5 +134,27 @@ void execute(String pinStatus, int pinNumber){
   if (pinStatus.equals("2:")) {
     Serial.println(pinState);
   }
+  if (pinStatus.equals("0;")) {
+    digitalWrite(pin0, LOW);
+    digitalWrite(pin1, LOW);
+    digitalWrite(pin2, LOW);
+    digitalWrite(pin3, LOW);
+    digitalWrite(pin4, LOW);
+    digitalWrite(pin5, LOW);
+    digitalWrite(pin6, LOW);
+    digitalWrite(pin7, LOW);
+    Serial.println("all pins off!");
+  }
+  if (pinStatus.equals("1;")) {
+    digitalWrite(pin0, HIGH);
+    digitalWrite(pin1, HIGH);
+    digitalWrite(pin2, HIGH);
+    digitalWrite(pin3, HIGH);
+    digitalWrite(pin4, HIGH);
+    digitalWrite(pin5, HIGH);
+    digitalWrite(pin6, HIGH);
+    digitalWrite(pin7, HIGH);
+    Serial.println("all pins on!");
+  }
 }
 
