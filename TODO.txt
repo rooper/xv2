@@ -1,0 +1,7 @@
++Return status of all pins
++Display serial comm. on webpage
++Provide method of input other then system shell
+
+~Fix status code
+
+-"?Ready!" message in Arduino, +Ready message in Python.
