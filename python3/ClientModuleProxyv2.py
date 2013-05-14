@@ -1,7 +1,7 @@
 import serial
 import socket
 
-usbPath = raw_input('Please enter the path to the device (/dev/tty...): ')
+usbPath = input('Please enter the path to the device (/dev/tty...): ')
 host = ''
 port = 8080
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,3 +24,4 @@ def serverWrite():
 	main()
 
 if __name__ == '__main__':
+  main()
