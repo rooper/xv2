@@ -1,7 +1,8 @@
 +Return status of all pins
-+Display serial comm. on webpage
 +Provide method of input other then system shell
++Keep full log in log.txt while clearing each refresh on webpage?
 
 ~Fix status code
+~Clean up Python code... complete mess, unneeded variables/lines, no comments, etc.
 
 -"?Ready!" message in Arduino, +Ready message in Python.
