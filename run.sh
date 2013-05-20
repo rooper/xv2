@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /
 echo "Enter the path from / to the xv2 folder. E.G. /root/Desktop/xv2"
 read directory
 cd $directory/python
